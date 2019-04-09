@@ -194,7 +194,7 @@ class CmsController extends CmsControllerCore
                 if ($tproduct != '')
                 {
                     $x = (array)new Product($tproduct, true, $this->context->language->id);
-                    if(!empty($x['id_product']) && $x['active'] == 1) {
+                    if(!empty($x['id']) && $x['active'] == 1) {
                         $productss[$tproduct] = $x;
                         $productss[$tproduct]['id_product'] = $tproduct;
                         $image = self::getImagesByID($tproduct, 1);
@@ -204,6 +204,7 @@ class CmsController extends CmsControllerCore
                 }
             }
         }
+        
         $products = Product::getProductsProperties($this->context->language->id, $productss);
         $this->context->smarty->assign('products', $products);
         $contents = $this->context->smarty->fetch(_PS_MODULE_DIR_ . 'cmsextracontent/views/templates/front/products.tpl');
